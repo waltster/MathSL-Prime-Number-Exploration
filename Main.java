@@ -22,6 +22,9 @@
  */
 package walterpach.exploration;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class Main {
@@ -29,8 +32,8 @@ public class Main {
 	 * This value represents the end of the set of numbers to check for primes.
 	 * Note that the set starts at 
 	 */
-	public static final int SET_BEGINNING = 0;
-	public static final int SET_END = 50000;
+	public static int SET_BEGINNING = 0;
+	public static int SET_END = 0;
 	
 	/**
 	 * 
@@ -48,6 +51,31 @@ public class Main {
 		ArrayList<Integer> spacing = new ArrayList<Integer>();
 		
 		System.out.println("Welcome to PrimeScanner... See github.com/waltster!");
+		System.console().printf("Beginning number: ");
+		String input;
+		int number = 0;
+		try {
+	        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+	        input = bufferedReader.readLine();
+	        number = Integer.parseInt(input);
+	    } catch (NumberFormatException ex) {
+	       System.out.println("Not a number !");
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+		SET_BEGINNING = number;
+		
+		System.console().printf("End number: ");
+		try {
+	        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+	        input = bufferedReader.readLine();
+	        number = Integer.parseInt(input);
+	    } catch (NumberFormatException ex) {
+	       System.out.println("Not a number !");
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+		SET_END = number;
 		
 		/**
 		 * This function scans the set of whole numbers from $SET_BEGINNING to $SET_END
@@ -55,7 +83,7 @@ public class Main {
 		 */
 		primes = findPrimes(SET_BEGINNING, SET_END);
 		
-		System.out.println("Calculating stats...");
+		System.out.println("\n=== Calculating stats... ===");
 		
 		int lastPrime = 1;
 
@@ -110,6 +138,10 @@ public class Main {
 		System.out.println("Scanned " + (SET_END - SET_BEGINNING) + " numbers");
 		System.out.println("Primes found: " + spacing.size() + ", Max-spacing: " + max + ", Min-spacing: " + min);
 		System.out.println("Mean: " + mean + ", Standard Deviation: " + standardDeviation);
+		
+		while(true) {
+			
+		}
 	}
 	
 	/**
@@ -129,6 +161,10 @@ public class Main {
 		 * Iterate over each number from the beginning of the set to the end.
 		 */
 		for(float n = SET_BEGINNING; n < SET_END; n++) {
+			if((int)n == (int)(SET_END * 0.1) || (int)n == (int)(SET_END * 0.2) || (int)n == (int)(SET_END * 0.3) || (int)n == (int)(SET_END * 0.4) || (int)n == (int)(SET_END * 0.5) || (int)n == (int)(SET_END * 0.6) || (int)n == (int)(SET_END * 0.7) || (int)n == (int)(SET_END * 0.8) || (int)n == (int)(SET_END * 0.9) || (int)n == (int)(SET_END)) {
+				System.console().printf(".");
+			}
+			
 			/**
 			 * Sort through the numbers from 2 to "n" minus one.
 			 */
@@ -139,6 +175,7 @@ public class Main {
 				 */
 				if((n / i) % 1 == 0 && i != n && i != 1) {
 					factors++;
+					break;
 				}
 			}
 			
