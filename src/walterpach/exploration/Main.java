@@ -34,12 +34,19 @@ public class Main {
 	 */
 	public static int SET_BEGINNING = 0;
 	public static int SET_END = 0;
-
+	public static boolean USE_DOTS = false;
+	
 	/**
 	 * 
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		for(String s : args) {
+			if(s.toLowerCase() == "-no_dots") {
+				USE_DOTS = false;
+				System.out.println("Dots disabled");
+			}
+		}
 		/**
 		 * This list stores all of the prime numbers that the program uses.
 		 */
@@ -164,12 +171,14 @@ public class Main {
 		 * Iterate over each number from the beginning of the set to the end.
 		 */
 		for (float n = SET_BEGINNING; n < SET_END; n++) {
-			if ((int) n == (int) (SET_END * 0.1) || (int) n == (int) (SET_END * 0.2) || (int) n == (int) (SET_END * 0.3)
+			if(USE_DOTS) {
+				if ((int) n == (int) (SET_END * 0.1) || (int) n == (int) (SET_END * 0.2) || (int) n == (int) (SET_END * 0.3)
 					|| (int) n == (int) (SET_END * 0.4) || (int) n == (int) (SET_END * 0.5)
 					|| (int) n == (int) (SET_END * 0.6) || (int) n == (int) (SET_END * 0.7)
 					|| (int) n == (int) (SET_END * 0.8) || (int) n == (int) (SET_END * 0.9)
 					|| (int) n == (int) (SET_END)) {
-				System.console().printf(".");
+					System.console().printf(".");
+				}
 			}
 
 			/**
